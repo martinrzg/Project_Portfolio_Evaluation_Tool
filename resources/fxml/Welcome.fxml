@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
+   <children>
+      <Pane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+         <effect>
+            <DropShadow blurType="GAUSSIAN" />
+         </effect>
+         <children>
+            <ImageView fitHeight="234.0" fitWidth="739.0" layoutX="18.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logoTecLowRes.png" />
+               </image>
+            </ImageView>
+            <HBox alignment="CENTER" layoutY="242.0" prefHeight="148.0" prefWidth="768.0">
+               <children>
+                  <JFXTextField fx:id="textFieldProyectID" focusColor="#003399" prefHeight="58.0" prefWidth="250.0" promptText="Name/Project ID">
+                     <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="32.0" right="32.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+                  <JFXTextField fx:id="textFieldEvaluatorName" focusColor="#003399" prefHeight="58.0" prefWidth="250.0" promptText="Evaluator name">
+                     <padding>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                     </padding>
+                     <HBox.margin>
+                        <Insets left="32.0" right="32.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+               <padding>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </padding>
+            </HBox>
+            <JFXButton fx:id="buttonStart" buttonType="RAISED" layoutX="259.0" layoutY="417.0" onAction="#makeStart" prefHeight="85.0" prefWidth="258.0" style="-fx-background-color: #003399;" text="Start" textFill="WHITE" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
