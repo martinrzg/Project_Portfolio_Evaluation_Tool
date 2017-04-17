@@ -1,12 +1,12 @@
 package controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.sun.org.apache.xpath.internal.operations.String;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -40,6 +40,9 @@ public class PaybackPeriod implements Initializable {
     @FXML private AnchorPane root;
     @FXML private JFXButton buttonAddTabItem;
     @FXML private JFXButton buttonDeleteTabItem;
+    @FXML private JFXTextField textFieldPrincipal;
+    @FXML private JFXTextField textFieldInterestRate;
+    @FXML private JFXComboBox<Integer> comboBoxPeriods;
 
     private ObservableList<TableItemPayback> data = FXCollections.observableArrayList(
         new TableItemPayback(0,0,0,0)
@@ -50,12 +53,26 @@ public class PaybackPeriod implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //System.out.println(tableView.toString());
         setupTable();
-        data.addListener(new ListChangeListener<TableItemPayback>() {
-            @Override
-            public void onChanged(Change<? extends TableItemPayback> c) {
+        setupComboBox();
 
+    }
+
+    private void setupComboBox() {
+        for (int i = 1; i <= 100; i++) {
+            comboBoxPeriods.getItems().add(i);
+        }
+        comboBoxPeriods.valueProperty().addListener(new ChangeListener<Integer>() {
+            @Override
+            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+                addPeriods(newValue);
             }
         });
+    }
+    private void addPeriods(int numPeriods){
+        data.clear();
+        for (int i = 0; i < numPeriods; i++) {
+            data.add(new TableItemPayback( getDataIndex(),0,0,0) );
+        }
     }
 
     @FXML
@@ -111,6 +128,7 @@ public class PaybackPeriod implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent event) {
                 ((TableItemPayback) event.getTableView().getItems().get(event.getTablePosition().getRow())).setOutflow((Float) event.getNewValue());
+
             }
         });
         colInflow.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));

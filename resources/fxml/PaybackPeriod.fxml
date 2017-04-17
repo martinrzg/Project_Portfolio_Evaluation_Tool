@@ -3,16 +3,12 @@
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
-<?import com.jfoenix.validation.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.effect.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PaybackPeriod">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1800.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PaybackPeriod">
    <effect>
       <DropShadow blurType="GAUSSIAN" />
    </effect>
@@ -24,12 +20,12 @@
          <children>
             <HBox>
                <children>
-                  <JFXTextField editable="false" prefHeight="35.0" prefWidth="124.0" text="Periods">
+                  <JFXTextField editable="false" prefHeight="35.0" prefWidth="97.0" text="Periods">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </JFXTextField>
-                  <JFXComboBox prefHeight="35.0" prefWidth="56.0">
+                  <JFXComboBox fx:id="comboBoxPeriods" prefHeight="35.0" prefWidth="79.0">
                      <HBox.margin>
                         <Insets left="8.0" right="8.0" />
                      </HBox.margin>
@@ -39,26 +35,40 @@
                   <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
                </VBox.margin>
             </HBox>
+            <HBox>
+               <children>
+                  <JFXTextField fx:id="textFieldPrincipal" prefHeight="29.0" prefWidth="196.0" promptText="Principal" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="16.0" left="16.0" right="16.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <JFXTextField fx:id="textFieldInterestRate" prefHeight="29.0" prefWidth="196.0" promptText="Interest rate (0-100%)" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="16.0" left="16.0" right="16.0" />
+               </VBox.margin>
+            </HBox>
          </children>
       </VBox>
-      <TableView fx:id="tableView" layoutX="14.0" layoutY="142.0" prefHeight="728.0" prefWidth="786.0" />
-      <JFXButton fx:id="buttonDeleteTabItem" contentDisplay="CENTER" layoutX="650.0" layoutY="879.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#deleteTabItem" prefHeight="52.0" prefWidth="52.0" text=" " textAlignment="CENTER">
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="160.0" prefHeight="728.0" prefWidth="786.0" />
+      <JFXButton fx:id="buttonDeleteTabItem" contentDisplay="CENTER" layoutX="650.0" layoutY="888.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#deleteTabItem" prefHeight="52.0" prefWidth="52.0" text=" " textAlignment="CENTER">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/ic_remove_circle_black_48dp_1x.png" />
                </image>
             </ImageView>
-         </graphic>
-      </JFXButton>
-      <JFXButton fx:id="buttonAddTabItem" contentDisplay="CENTER" layoutX="714.0" layoutY="881.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addTabITem" prefHeight="52.0" prefWidth="52.0" text=" " textAlignment="CENTER">
+         </graphic></JFXButton>
+      <JFXButton fx:id="buttonAddTabItem" contentDisplay="CENTER" layoutX="715.0" layoutY="888.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addTabITem" prefHeight="52.0" prefWidth="52.0" text=" " textAlignment="CENTER">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/ic_add_circle_black_48dp_1x.png" />
                </image>
             </ImageView>
-         </graphic>
-      </JFXButton>
+         </graphic></JFXButton>
    </children>
 </AnchorPane>

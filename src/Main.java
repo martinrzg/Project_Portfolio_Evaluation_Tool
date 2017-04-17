@@ -9,6 +9,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         //new Welcome().launchWelcomeScene(primaryStage);
         new Home().displayHomeScreen(primaryStage);
+
         /*Parent root = FXMLLoader.load(getClass().getResource("fxml/Welcome.fxml"));
         primaryStage.setTitle("Project Portfolio Evaluation Tool");
         primaryStage.setScene(new Scene(root, 800, 600));
