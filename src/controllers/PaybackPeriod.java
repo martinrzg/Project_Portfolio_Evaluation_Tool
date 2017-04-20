@@ -170,7 +170,6 @@ public class PaybackPeriod implements Initializable {
             public void handle(TableColumn.CellEditEvent event) {
                 ((TableItemPayback) event.getTableView().getItems().get(event.getTablePosition().getRow())).setOutflow((Float) event.getNewValue());
                 data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
-
             }
         });
         colInflow.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));

@@ -17,7 +17,7 @@ public class Projection {
         data.get(0).setCumulative(data.get(0).getInflow() - data.get(0).getOutflow());
         accumulated = data.get(0).getInflow() - data.get(0).getOutflow();
 
-        for (int i=1; i<p; i++) {
+        for (int i=1; i<=p; i++) {
             netFlow[i]= data.get(i).getInflow() - data.get(i).getOutflow();
             accumulated =(netFlow[i]+(accumulated*interestRate));
         }
