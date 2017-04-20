@@ -79,7 +79,7 @@ public class Home implements Initializable
                 break;
             case 1:             /*      NPV     */
                 System.out.println("NPV");
-                srcResource += "PaybackPeriod";
+                srcResource += "NPV";
                 break;
             case 2:             /*   CheckList  */
                 System.out.println("Checklist");

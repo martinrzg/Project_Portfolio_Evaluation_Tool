@@ -2,6 +2,7 @@ package controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import com.jfoenix.validation.RequiredFieldValidator;
 import com.sun.org.apache.xpath.internal.operations.String;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -15,18 +16,25 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import javafx.util.converter.FloatStringConverter;
 import models.TableItemPayback;
+import operations.Projection;
 import utils.Utils;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -43,18 +51,51 @@ public class PaybackPeriod implements Initializable {
     @FXML private JFXTextField textFieldPrincipal;
     @FXML private JFXTextField textFieldInterestRate;
     @FXML private JFXComboBox<Integer> comboBoxPeriods;
-
-    private ObservableList<TableItemPayback> data = FXCollections.observableArrayList(
-        new TableItemPayback(0,0,0,0)
-    );
+    @FXML private BarChart<Integer, Float> barChart;
+    private ObservableList<TableItemPayback> data ;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //System.out.println(tableView.toString());
+        data = FXCollections.observableArrayList(
+                new TableItemPayback(0,0,0,0)
+        );
+        barChart.getXAxis().setLabel("Period");
+        barChart.getYAxis().setLabel("Cash Flow");
+        XYChart.Series dataChart = new XYChart.Series();
         setupTable();
         setupComboBox();
+        setUpValidator();
+    }
 
+    private void setUpValidator() {
+        RequiredFieldValidator principalValidator = new RequiredFieldValidator();
+        RequiredFieldValidator interestRateValidator = new RequiredFieldValidator();
+
+
+        textFieldPrincipal.getValidators().add(principalValidator);
+        textFieldInterestRate.getValidators().add(interestRateValidator);
+
+        principalValidator.setMessage("Pricipal must be a numeric value.");
+        interestRateValidator.setMessage("Interest rate must be numeric between 0-100 %");
+
+        try {
+            Image iconError = new Image(new FileInputStream("resources\\icons\\ic_error_black_24dp_1x.png"));
+            principalValidator.setIcon(new ImageView(iconError));
+            interestRateValidator.setIcon(new ImageView(iconError));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        textFieldPrincipal.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if(!newValue){
+                    textFieldPrincipal.validate();
+                }
+            }
+        });
     }
 
     private void setupComboBox() {
@@ -128,6 +169,7 @@ public class PaybackPeriod implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent event) {
                 ((TableItemPayback) event.getTableView().getItems().get(event.getTablePosition().getRow())).setOutflow((Float) event.getNewValue());
+                data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
 
             }
         });
@@ -136,15 +178,12 @@ public class PaybackPeriod implements Initializable {
             @Override
             public void handle(TableColumn.CellEditEvent event) {
                 ((TableItemPayback) event.getTableView().getItems().get(event.getTablePosition().getRow())).setInflow((Float) event.getNewValue());
+                data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
             }
         });
 
-
-
         tableView.setEditable(true);
         tableView.setItems(data);
-
-
     }
 
 
