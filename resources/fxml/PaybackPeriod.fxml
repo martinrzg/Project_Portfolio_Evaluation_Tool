@@ -18,43 +18,54 @@
       <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
    </padding>
    <children>
-      <VBox>
+      <HBox>
          <children>
-            <HBox>
+            <VBox>
                <children>
-                  <JFXTextField editable="false" prefHeight="35.0" prefWidth="97.0" text="Periods">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXComboBox fx:id="comboBoxPeriods" prefHeight="35.0" prefWidth="79.0">
-                     <HBox.margin>
-                        <Insets left="8.0" right="8.0" />
-                     </HBox.margin>
-                  </JFXComboBox>
+                  <HBox>
+                     <children>
+                        <JFXTextField editable="false" prefHeight="35.0" prefWidth="97.0" text="Periods">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXComboBox fx:id="comboBoxPeriods" prefHeight="35.0" prefWidth="79.0">
+                           <HBox.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </HBox.margin>
+                        </JFXComboBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <JFXTextField fx:id="textFieldPrincipal" prefHeight="29.0" prefWidth="196.0" promptText="Principal" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="16.0" left="16.0" right="16.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox>
+            </VBox>
+            <VBox>
                <children>
-                  <JFXTextField fx:id="textFieldPrincipal" prefHeight="29.0" prefWidth="196.0" promptText="Principal" />
+                  <HBox>
+                     <children>
+                        <JFXTextField fx:id="textFieldInterestRate" prefHeight="29.0" prefWidth="196.0" promptText="Interest rate (0-100%)" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="16.0" left="16.0" right="16.0" />
+                     </VBox.margin>
+                  </HBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="16.0" left="16.0" right="16.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox>
-               <children>
-                  <JFXTextField fx:id="textFieldInterestRate" prefHeight="29.0" prefWidth="196.0" promptText="Interest rate (0-100%)" />
-               </children>
-               <VBox.margin>
-                  <Insets bottom="16.0" left="16.0" right="16.0" />
-               </VBox.margin>
-            </HBox>
+               <HBox.margin>
+                  <Insets bottom="16.0" right="16.0" top="16.0" />
+               </HBox.margin>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
       <TableView fx:id="tableView" layoutX="14.0" layoutY="160.0" prefHeight="728.0" prefWidth="786.0" />
       <JFXButton fx:id="buttonDeleteTabItem" contentDisplay="CENTER" layoutX="650.0" layoutY="888.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#deleteTabItem" prefHeight="52.0" prefWidth="52.0" text=" " textAlignment="CENTER">
          <graphic>

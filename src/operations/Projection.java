@@ -9,17 +9,19 @@ import models.TableItemPayback;
 public class Projection {
 
     public static ObservableList<TableItemPayback> calculatePayback(ObservableList<TableItemPayback> data, double principal, double interestRate){//recibir parametros
+
         interestRate =+ 1;                                            //Interest rate
-        int p = data.size();                                                      //Periods
+        int p = data.size()-1;                                                      //Periods
         double accumulated = 0.0;                                       //Accumulated
-        double[] netFlow = {};
+        double netFlow = 0;
 
         data.get(0).setCumulative(data.get(0).getInflow() - data.get(0).getOutflow());
         accumulated = data.get(0).getInflow() - data.get(0).getOutflow();
 
         for (int i=1; i<=p; i++) {
-            netFlow[i]= data.get(i).getInflow() - data.get(i).getOutflow();
-            accumulated =(netFlow[i]+(accumulated*interestRate));
+            netFlow = data.get(i).getInflow() - data.get(i).getOutflow();
+            accumulated =(netFlow+(accumulated*interestRate));
+            data.get(i).setCumulative((float) accumulated);
         }
         return data;
     }

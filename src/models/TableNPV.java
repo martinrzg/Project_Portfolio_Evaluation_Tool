@@ -4,19 +4,22 @@ import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
- * Created by Martín Ruíz on 4/14/2017.
+ * Created by gluqu on 18/04/2017.
  */
-public class TableItemPayback  {
+public class TableNPV {
+
     private SimpleIntegerProperty period;
     private SimpleFloatProperty outflow;
     private SimpleFloatProperty inflow;
-    private SimpleFloatProperty cumulative;
+    private SimpleFloatProperty ncf;
+    private SimpleFloatProperty ccf;
 
-    public TableItemPayback(int period, float outflow, float inflow, float cumulative) {
-        this.period      = new SimpleIntegerProperty(period);
-        this.outflow     = new SimpleFloatProperty(outflow);
-        this.inflow      = new SimpleFloatProperty(inflow);
-        this.cumulative = new SimpleFloatProperty(cumulative);
+    public TableNPV(int period, float outflow, float inflow, float ncf, float ccf) {
+        this.period = new SimpleIntegerProperty(period);
+        this.outflow = new SimpleFloatProperty(outflow);
+        this.inflow = new SimpleFloatProperty(inflow);
+        this.ncf = new SimpleFloatProperty(ncf);
+        this.ccf = new SimpleFloatProperty(ccf);
     }
 
     public int getPeriod() {
@@ -55,15 +58,27 @@ public class TableItemPayback  {
         this.inflow.set(inflow);
     }
 
-    public float getCumulative() {
-        return cumulative.get();
+    public float getNcf() {
+        return ncf.get();
     }
 
-    public SimpleFloatProperty cumulativeProperty() {
-        return cumulative;
+    public SimpleFloatProperty ncfProperty() {
+        return ncf;
     }
 
-    public void setCumulative(float cumulative) {
-        this.cumulative.set(cumulative);
+    public void setNcf(float ncf) {
+        this.ncf.set(ncf);
+    }
+
+    public float getCcf() {
+        return ccf.get();
+    }
+
+    public SimpleFloatProperty ccfProperty() {
+        return ccf;
+    }
+
+    public void setCcf(float ccf) {
+        this.ccf.set(ccf);
     }
 }

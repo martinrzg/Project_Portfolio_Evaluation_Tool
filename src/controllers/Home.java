@@ -64,7 +64,6 @@ public class Home implements Initializable
             tabManager(tabPane.getSelectionModel().getSelectedIndex());
         });
 
-
     }
 
 
