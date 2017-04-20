@@ -1,48 +1,63 @@
 package controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
+import com.jfoenix.controls.cells.editors.DoubleTextFieldEditorBuilder;
+import com.jfoenix.controls.cells.editors.IntegerTextFieldEditorBuilder;
+import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.validation.NumberValidator;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.util.converter.FloatStringConverter;
+import models.PaybackRow;
 import models.TableItemPayback;
-import operations.Projection;
 import utils.Utils;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 
 /**
  * Created by Martín Ruíz on 4/14/2017.
  */
 public class PaybackPeriod implements Initializable {
 
-    @FXML private TableView<TableItemPayback> tableView;
+    private static final String PREFIX = "( ";
+    private static final String POSTFIX = " )";
+
     @FXML private AnchorPane root;
-    @FXML private JFXButton buttonAddTabItem;
-    @FXML private JFXButton buttonDeleteTabItem;
     @FXML private JFXTextField textFieldPrincipal;
     @FXML private JFXTextField textFieldInterestRate;
     @FXML private JFXComboBox<Integer> comboBoxPeriods;
     @FXML private BarChart<Number, Number> barChart;
 
-    private ObservableList<TableItemPayback> data ;
+    // New Skeleton
+    @FXML private JFXTreeTableView<PaybackRow> treeTableView;
+    @FXML private JFXButton treeTableViewAdd;
+    @FXML private JFXButton treeTableViewRemove;
+    @FXML private JFXTextField searchField;
+    @FXML private JFXTreeTableColumn<PaybackRow, Integer> periodColumn;
+    @FXML private JFXTreeTableColumn<PaybackRow, Double> outflowColumn;
+    @FXML private JFXTreeTableColumn<PaybackRow, Double> inflowColumn;
+    @FXML private JFXTreeTableColumn<PaybackRow, Double> netCashFlowColumn;
+    @FXML private JFXTreeTableColumn<PaybackRow, Double> cumulativeColumn;
+    @FXML private Label treeTableViewCount;
+
+    private ObservableList<PaybackRow> data ;
+
     private XYChart.Data<Number, Number> dataChart;
     private XYChart.Series seriesChart;
 
@@ -50,7 +65,9 @@ public class PaybackPeriod implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //System.out.println(tableView.toString());
         data = FXCollections.observableArrayList();
-
+        data.add(new PaybackRow(0,0,0,0,0));
+        data.add(new PaybackRow(1,0,0,0,0));
+        data.add(new PaybackRow(2,0,0,0,0));
         setupTable();
         setupComboBox();
         setUpValidator();
@@ -69,9 +86,7 @@ public class PaybackPeriod implements Initializable {
                 seriesChart.getData().add(new XYChart.Data(data.get(data.size()-1).getPeriod()+"", data.get(data.size()-1).getCumulative()));
             }
         });*/
-        data.add(new TableItemPayback(0,0,0,-5));
-        data.add(new TableItemPayback(1,0,0,-2));
-        data.add(new TableItemPayback(2,0,0,10));
+
         barChart.getData().add(seriesChart);
     }
 
@@ -143,16 +158,10 @@ public class PaybackPeriod implements Initializable {
     private void addPeriods(int numPeriods){
         data.clear();
         for (int i = 0; i < numPeriods; i++) {
-            data.add(new TableItemPayback( getDataIndex(),0,0,0) );
+            data.add(new PaybackRow( getDataIndex(),0,0,0,0) );
         }
     }
 
-    @FXML
-    void deleteTabItem(ActionEvent event) {
-        TableItemPayback itemSelected = tableView.getSelectionModel().getSelectedItem();
-        data.remove(itemSelected);
-        reCalculatePeriods();
-    }
 
     private void reCalculatePeriods() {
         for (int i = 0; i < data.size(); i++) {
@@ -168,76 +177,70 @@ public class PaybackPeriod implements Initializable {
         }
     }
 
-    @FXML
-    void addTabITem(ActionEvent event) {
-        data.add(new TableItemPayback( getDataIndex(),0,0,0));
-        data.add(new TableItemPayback( getDataIndex(),0,0,0));
+    private <T> void setupCellValueFactory(JFXTreeTableColumn<PaybackRow, T> column, Function<PaybackRow, ObservableValue<T>> mapper) {
+        column.setCellValueFactory((TreeTableColumn.CellDataFeatures<PaybackRow, T> param) -> {
+            if (column.validateValue(param)) {
+                return mapper.apply(param.getValue().getValue());
+            } else {
+                return column.getComputedValue(param);
+            }
+        });
+    }
+
+    private void setupTable(){
+        setupCellValueFactory(periodColumn,  p->p.periodProperty().asObject());
+        setupCellValueFactory(outflowColumn, p->p.outflowProperty().asObject());
+        setupCellValueFactory(inflowColumn,  p->p.inflowProperty().asObject());
+        setupCellValueFactory(netCashFlowColumn, p->p.netCashFlowProperty().asObject());
+        setupCellValueFactory(cumulativeColumn,  p->p.cumulativeCashFlowProperty().asObject());
+
+        outflowColumn.setCellFactory((TreeTableColumn<PaybackRow, Double> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                    new DoubleTextFieldEditorBuilder());
+        });
+        outflowColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<PaybackRow, Double> t) -> {
+            t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().outflowProperty().set(t.getNewValue());
+        });
+        inflowColumn.setCellFactory((TreeTableColumn<PaybackRow, Double> param) -> {
+            return new GenericEditableTreeTableCell<>(
+                    new DoubleTextFieldEditorBuilder());
+        });
+        outflowColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<PaybackRow, Double> t) -> {
+            t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().inflowProperty().set(t.getNewValue());
+        });
+
+        treeTableViewAdd.setOnMouseClicked((e) -> {
+            data.add(new PaybackRow(getDataIndex(),0,0,0,0));
+            final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
+            currCountProp.set(currCountProp.get() + 1);
+        });
+        treeTableViewRemove.setOnMouseClicked((e) -> {
+            data.remove(treeTableView.getSelectionModel().selectedItemProperty().get().getValue());
+            reCalculatePeriods();
+            final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
+            currCountProp.set(currCountProp.get() - 1);
+        });
+
+        treeTableView.setRoot(new RecursiveTreeItem<>(data, RecursiveTreeObject::getChildren));
+        treeTableView.setShowRoot(false);
+        treeTableView.setEditable(true);
+        treeTableViewCount.textProperty().bind(Bindings.createStringBinding(()->PREFIX + treeTableView.getCurrentItemsCount()
+                                                                             + POSTFIX, treeTableView.currentItemsCountProperty()));
+        searchField.textProperty().addListener(setupSearchField(treeTableView));
+
+    }
+
+    private ChangeListener<String> setupSearchField(final JFXTreeTableView<PaybackRow> tableView) {
+        return (o, oldVal, newVal) ->
+                tableView.setPredicate(paybackProp -> {
+                    final PaybackRow temp = paybackProp.getValue();
+                    return Integer.toString(temp.periodProperty().get()).contains(newVal)
+                            || Double.toString(temp.outflowProperty().get()).contains(newVal)
+                            || Double.toString(temp.inflowProperty().get()).contains(newVal)
+                            || Double.toString(temp.netCashFlowProperty().get()).contains(newVal)
+                            || Double.toString(temp.cumulativeCashFlowProperty().get()).contains(newVal) ;
+                });
     }
 
 
-    public void setupTable(){
-        //Creating columns of the table
-        TableColumn colPeriod      = new TableColumn("Period");
-        TableColumn colOutflow     = new TableColumn("Outflow");
-        TableColumn colInflow      = new TableColumn("Inflow");
-        TableColumn colCumulative = new TableColumn("Accumulative Cash Flow");
-        //Setting Width of columns
-        colOutflow.setPrefWidth(200);
-        colInflow.setPrefWidth(200);
-        colCumulative.setPrefWidth(200);
-        //tableView.getColumns().setAll(colOutflow,colInflow,colAcumulative);
-        //Adding columns to the table
-        tableView.getColumns().addAll(colPeriod,colOutflow,colInflow,colCumulative);
-        //tableView.setOnMouseClicked(e-> );
-
-        colPeriod.setCellValueFactory(new PropertyValueFactory<TableItemPayback,Integer>("period"));
-        colOutflow.setCellValueFactory(new PropertyValueFactory<TableItemPayback,Float>("outflow"));
-        colInflow.setCellValueFactory(new PropertyValueFactory<TableItemPayback,Float>("inflow"));
-        colCumulative.setCellValueFactory(new PropertyValueFactory<TableItemPayback,Float>("cumulative"));
-
-        /* Make the CellFactory so that can be editable */
-        colOutflow.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
-        colOutflow.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent event) {
-                ((TableItemPayback) event.getTableView().getItems().get(event.getTablePosition().getRow())).setOutflow((Float) event.getNewValue());
-                double principal, interestRate;
-                try{
-                    principal = Double.parseDouble(textFieldPrincipal.getText());
-                }catch (Exception e){
-                    principal = 0;
-                }
-                try {
-                    interestRate = Double.parseDouble(textFieldInterestRate.getText());
-                }catch (Exception e){
-                    interestRate = 0;
-                }
-                data = Projection.calculatePayback(data,principal,interestRate);
-            }
-
-        });
-        colInflow.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
-        colInflow.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent>() {
-            @Override
-            public void handle(TableColumn.CellEditEvent event) {
-                ((TableItemPayback) event.getTableView().getItems().get(event.getTablePosition().getRow())).setInflow((Float) event.getNewValue());
-                double principal, interestRate;
-                try{
-                    principal = Double.parseDouble(textFieldPrincipal.getText());
-                }catch (Exception e){
-                    principal = 0;
-                }
-                try {
-                    interestRate = Double.parseDouble(textFieldInterestRate.getText());
-                }catch (Exception e){
-                    interestRate = 0;
-                }
-                data = Projection.calculatePayback(data,principal,interestRate);
-
-                //updateChart();
-            }
-        });
-        tableView.setEditable(true);
-        tableView.setItems(data);
-    }
 }

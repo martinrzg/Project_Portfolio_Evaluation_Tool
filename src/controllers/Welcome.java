@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,6 +44,10 @@ public class Welcome implements Initializable{
         try{
             parent =  (Parent) fxmlLoader.load();
             scene = new Scene(parent,800,600);
+            final ObservableList<String> stylesheets = scene.getStylesheets();
+            stylesheets.addAll(this.getClass().getResource("..//css/jfoenix-components.css").toExternalForm(),
+                    this.getClass().getResource("..//css/jfoenix-design.css").toExternalForm(),
+                    this.getClass().getResource("..//css/jfoenix-main-demo.css").toExternalForm());
         }catch (IOException e){
             System.out.println("Error loading windows" +e.toString());
         }

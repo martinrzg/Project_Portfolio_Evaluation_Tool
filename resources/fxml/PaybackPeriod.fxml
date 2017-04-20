@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1800.0" style="-fx-background-color: #FFFFFF;" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PaybackPeriod">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PaybackPeriod">
    <effect>
       <DropShadow blurType="GAUSSIAN" />
    </effect>
@@ -18,7 +18,7 @@
       <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
    </padding>
    <children>
-      <HBox>
+      <HBox AnchorPane.leftAnchor="16.0">
          <children>
             <VBox>
                <children>
@@ -66,23 +66,51 @@
             </VBox>
          </children>
       </HBox>
-      <TableView fx:id="tableView" layoutX="14.0" layoutY="160.0" prefHeight="728.0" prefWidth="786.0" />
-      <JFXButton fx:id="buttonDeleteTabItem" contentDisplay="CENTER" layoutX="650.0" layoutY="888.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#deleteTabItem" prefHeight="52.0" prefWidth="52.0" text=" " textAlignment="CENTER">
-         <graphic>
-            <ImageView fitHeight="50.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/ic_remove_circle_black_48dp_1x.png" />
-               </image>
-            </ImageView>
-         </graphic></JFXButton>
-      <JFXButton fx:id="buttonAddTabItem" contentDisplay="CENTER" layoutX="715.0" layoutY="888.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addTabITem" prefHeight="52.0" prefWidth="52.0" text=" " textAlignment="CENTER">
-         <graphic>
-            <ImageView fitHeight="50.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/ic_add_circle_black_48dp_1x.png" />
-               </image>
-            </ImageView>
-         </graphic></JFXButton>
+      <VBox layoutX="70.0" layoutY="210.0" maxHeight="872.0" maxWidth="766.0" prefHeight="728.0" prefWidth="764.0" spacing="10" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="120.0">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label styleClass="title-label" text="Read Only Tree Table View               ">
+                     <HBox.margin>
+                        <Insets left="16.0" right="16.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="treeTableViewCount" minWidth="80" styleClass="title-label" />
+                  <JFXButton fx:id="treeTableViewAdd" buttonType="FLAT" text="+">
+                     <HBox.margin>
+                        <Insets left="8.0" right="8.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="treeTableViewRemove" buttonType="FLAT" text="-">
+                     <HBox.margin>
+                        <Insets right="8.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <StackPane HBox.hgrow="ALWAYS">
+                     <children>
+                        <StackPane maxWidth="200" StackPane.alignment="CENTER_RIGHT">
+                           <children>
+                              <JFXTextField fx:id="searchField" promptText="Search..." />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </StackPane>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <JFXTreeTableView fx:id="treeTableView" prefHeight="752.0" prefWidth="764.0">
+               <columns>
+                  <JFXTreeTableColumn fx:id="periodColumn" minWidth="45.0" prefWidth="55.0" resizable="false" text="Period" />
+                  <JFXTreeTableColumn fx:id="outflowColumn" minWidth="129.0" prefWidth="175.0" resizable="false" text="Outflow" />
+                  <JFXTreeTableColumn fx:id="inflowColumn" minWidth="0.0" prefWidth="175.0" resizable="false" text="Inflow" />
+                  <JFXTreeTableColumn fx:id="netCashFlowColumn" minWidth="115.0" prefWidth="175.0" resizable="false" text="Net Cash Flow" />
+                  <JFXTreeTableColumn fx:id="cumulativeColumn" minWidth="133" prefWidth="180.0" resizable="false" text="Cumulative Cash Flow" />
+               </columns>
+            </JFXTreeTableView>
+         </children>
+      </VBox>
       <BarChart fx:id="barChart" layoutX="854.0" layoutY="160.0" prefHeight="728.0" prefWidth="889.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />

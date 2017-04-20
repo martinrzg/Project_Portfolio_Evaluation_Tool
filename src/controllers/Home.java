@@ -2,6 +2,7 @@ package controllers;
 
 import com.jfoenix.controls.JFXTabPane;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +40,10 @@ public class Home implements Initializable
             parent = (Parent) fxmlLoader.load();
             // set height and width here for this home scene
             scene = new Scene(parent, 1900  , 1000);
+            final ObservableList<String> stylesheets = scene.getStylesheets();
+            stylesheets.addAll(this.getClass().getResource("..//css/jfoenix-components.css").toExternalForm(),
+                               this.getClass().getResource("..//css/jfoenix-design.css").toExternalForm(),
+                               this.getClass().getResource("..//css/jfoenix-main-demo.css").toExternalForm());
 
         } catch (IOException e) {
             System.out.println("Error loading resource "+e.toString());

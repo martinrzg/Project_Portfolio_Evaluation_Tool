@@ -1,12 +1,14 @@
 import controllers.Home;
 import controllers.Welcome;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
         //new Welcome().launchWelcomeScene(primaryStage);
         new Home().displayHomeScreen(primaryStage);
 
