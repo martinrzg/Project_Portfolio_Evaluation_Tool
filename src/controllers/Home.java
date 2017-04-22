@@ -11,9 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import models.Session;
+import utils.Utils;
 
 import java.io.IOException;
 import java.net.URL;
@@ -62,12 +64,13 @@ public class Home implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-
         tabManager(0);
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             tabManager(tabPane.getSelectionModel().getSelectedIndex());
         });
+        for (int i = 0; i < tabPane.getTabs().size(); i++) {
+            tabPane.getTabs().get(i).setTooltip(new Tooltip(Utils.tabMessages[i]));
+        }
 
     }
 

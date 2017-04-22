@@ -57,12 +57,9 @@ public class Welcome implements Initializable{
         this.stage = stage;
         stage.setTitle("Project Portfolio Evaluation Tool - Welcome");
         stage.setScene(scene);
-
-
         //Don't forget to add below code in every controller
         //stage.hide();
         stage.show();
-
     }
 
     @Override

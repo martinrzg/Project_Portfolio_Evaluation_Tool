@@ -2,7 +2,6 @@ package controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.DoubleTextFieldEditorBuilder;
-import com.jfoenix.controls.cells.editors.IntegerTextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.validation.NumberValidator;
@@ -12,18 +11,16 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import models.PaybackRow;
-import models.TableItemPayback;
+import operations.Projection;
 import utils.Utils;
 
 import java.net.URL;
@@ -66,8 +63,7 @@ public class PaybackPeriod implements Initializable {
         //System.out.println(tableView.toString());
         data = FXCollections.observableArrayList();
         data.add(new PaybackRow(0,0,0,0,0));
-        data.add(new PaybackRow(1,0,0,0,0));
-        data.add(new PaybackRow(2,0,0,0,0));
+
         setupTable();
         setupComboBox();
         setUpValidator();
@@ -78,16 +74,15 @@ public class PaybackPeriod implements Initializable {
         barChart.getXAxis().setLabel("Period");
         barChart.getYAxis().setLabel("Cash Flow");
 
-        seriesChart = new XYChart.Series();
-        /*data.addListener(new ListChangeListener<TableItemPayback>() {
+        //updateChartData();
+        /*data.addListener(new ListChangeListener<PaybackRow>() {
             @Override
-            public void onChanged(Change<? extends TableItemPayback> c) {
+            public void onChanged(Change<? extends PaybackRow> c) {
                 System.out.println(c.getList().get(data.size()-1).getPeriod());
-                seriesChart.getData().add(new XYChart.Data(data.get(data.size()-1).getPeriod()+"", data.get(data.size()-1).getCumulative()));
+                seriesChart.getData().add(new XYChart.Data(data.get(data.size()-1).getPeriod()+"", data.get(data.size()-1).getNetCashFlow()));
             }
-        });*/
-
-        barChart.getData().add(seriesChart);
+        });
+        */
     }
 
     /*public void updateChart(){
@@ -97,8 +92,6 @@ public class PaybackPeriod implements Initializable {
             seriesChart.getData().add(dataChart);
         }
     }*/
-
-
 
     private void setUpValidator() {
         NumberValidator principalValidator = new NumberValidator();
@@ -160,20 +153,27 @@ public class PaybackPeriod implements Initializable {
         for (int i = 0; i < numPeriods; i++) {
             data.add(new PaybackRow( getDataIndex(),0,0,0,0) );
         }
+        //treeTableViewCount.setText("( "+String.valueOf(treeTableView.getCurrentItemsCount())+" )");
     }
-
 
     private void reCalculatePeriods() {
         for (int i = 0; i < data.size(); i++) {
             data.get(i).setPeriod(i) ;
         }
     }
-
     private int getDataIndex (){
         if(data.size() <=0 ){
             return 0;
         }else{
             return data.get(data.size()-1).getPeriod() +1;
+        }
+    }
+    private void printData(){
+        for (int i = 0; i < data.size(); i++) {
+            PaybackRow temp = data.get(i);
+            System.out.println("p:"+temp.periodProperty().intValue()+" outf: "+temp.outflowProperty().doubleValue()
+                    +" in: "+temp.inflowProperty().doubleValue()+" ncf:"+temp.netCashFlowProperty().doubleValue()
+                    +" ccf:"+temp.cumulativeCashFlowProperty().doubleValue());
         }
     }
 
@@ -200,25 +200,32 @@ public class PaybackPeriod implements Initializable {
         });
         outflowColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<PaybackRow, Double> t) -> {
             t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().outflowProperty().set(t.getNewValue());
+            data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
+            printData();
+
         });
         inflowColumn.setCellFactory((TreeTableColumn<PaybackRow, Double> param) -> {
             return new GenericEditableTreeTableCell<>(
                     new DoubleTextFieldEditorBuilder());
         });
-        outflowColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<PaybackRow, Double> t) -> {
+        inflowColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<PaybackRow, Double> t) -> {
             t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().inflowProperty().set(t.getNewValue());
+            data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
+            printData();
         });
 
         treeTableViewAdd.setOnMouseClicked((e) -> {
             data.add(new PaybackRow(getDataIndex(),0,0,0,0));
             final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
             currCountProp.set(currCountProp.get() + 1);
+            data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
         });
         treeTableViewRemove.setOnMouseClicked((e) -> {
             data.remove(treeTableView.getSelectionModel().selectedItemProperty().get().getValue());
             reCalculatePeriods();
             final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
             currCountProp.set(currCountProp.get() - 1);
+            data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
         });
 
         treeTableView.setRoot(new RecursiveTreeItem<>(data, RecursiveTreeObject::getChildren));
@@ -241,6 +248,4 @@ public class PaybackPeriod implements Initializable {
                             || Double.toString(temp.cumulativeCashFlowProperty().get()).contains(newVal) ;
                 });
     }
-
-
 }

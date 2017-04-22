@@ -11,6 +11,9 @@ import java.io.FileNotFoundException;
  */
 public class Utils {
 
+    public static java.lang.String[] tabMessages = {"Payback Period Explanation","Net Present Value", "CheckList", "Depreciaton","Matrix"};
+
+
     public static Image geErrorIcon(){
         try {
             Image iconError = new Image(new FileInputStream("resources\\icons\\ic_error_black_24dp_1x.png"));

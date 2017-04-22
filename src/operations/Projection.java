@@ -1,27 +1,28 @@
 package operations;
 
 import javafx.collections.ObservableList;
-import models.TableItemPayback;
+import models.PaybackRow;
 
 /**
  * Created by Martín Ruíz on 4/19/2017.
  */
 public class Projection {
 
-    public static ObservableList<TableItemPayback> calculatePayback(ObservableList<TableItemPayback> data, double principal, double interestRate){//recibir parametros
+    public static ObservableList<PaybackRow> calculatePayback(ObservableList<PaybackRow> data, double principal, double interestRate){//recibir parametros
 
-        interestRate =+ 1;                                            //Interest rate
-        int p = data.size()-1;                                                      //Periods
-        double accumulated = 0.0;                                       //Accumulated
+        interestRate = (interestRate/100)+1;                            //Interest rate
+        int p = data.size()-1;                                        //Periods
+        double accumulated = 0.0;                                     //Accumulated
         double netFlow = 0;
 
-        data.get(0).setCumulative(data.get(0).getInflow() - data.get(0).getOutflow());
+        data.get(0).setCumulativeCashFlow(data.get(0).getInflow() - data.get(0).getOutflow());
         accumulated = data.get(0).getInflow() - data.get(0).getOutflow();
 
         for (int i=1; i<=p; i++) {
             netFlow = data.get(i).getInflow() - data.get(i).getOutflow();
-            accumulated =(netFlow+(accumulated*interestRate));
-            data.get(i).setCumulative((float) accumulated);
+            data.get(i).setNetCashFlow(netFlow);
+            accumulated =(netFlow+(data.get(i-1).getCumulativeCashFlow()*interestRate));
+            data.get(i).setCumulativeCashFlow((float) accumulated);
         }
         return data;
     }

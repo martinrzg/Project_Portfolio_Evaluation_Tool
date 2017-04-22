@@ -17,9 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.converter.FloatStringConverter;
-import models.TableItemPayback;
 import models.TableNPV;
-import operations.Projection;
 
 import java.net.URL;
 import java.util.ResourceBundle;
