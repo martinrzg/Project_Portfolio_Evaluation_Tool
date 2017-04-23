@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
  */
 public class Utils {
 
-    public static java.lang.String[] tabMessages = {"Payback Period Explanation","Net Present Value", "CheckList", "Depreciaton","Matrix"};
+    public static java.lang.String[] tabMessages = {"Search when does the project will start obtaining revenues","The value of a project including the investment rate and taxes", "Criteria filter for the viability of a project", "Big picture of the depreciation of items","Detailed filter for project viability evaluation"};
 
 
     public static Image geErrorIcon(){

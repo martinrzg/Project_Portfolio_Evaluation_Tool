@@ -59,6 +59,10 @@
                         <Insets bottom="16.0" left="16.0" right="16.0" />
                      </VBox.margin>
                   </HBox>
+                  <JFXButton fx:id="buttonClear" buttonType="RAISED" prefHeight="36.0" prefWidth="253.0" style="-fx-background-color: #003399;" text="Clear" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                     </VBox.margin></JFXButton>
                </children>
                <HBox.margin>
                   <Insets bottom="16.0" right="16.0" top="16.0" />
@@ -111,7 +115,7 @@
             </JFXTreeTableView>
          </children>
       </VBox>
-      <BarChart fx:id="barChart" layoutX="854.0" layoutY="160.0" prefHeight="728.0" prefWidth="889.0">
+      <BarChart fx:id="barChart" layoutX="854.0" layoutY="160.0" prefHeight="728.0" prefWidth="889.0" title="Cash Flow Diagram">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>

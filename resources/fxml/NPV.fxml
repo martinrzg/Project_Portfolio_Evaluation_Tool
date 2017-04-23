@@ -38,27 +38,30 @@
                         </JFXComboBox>
                      </children>
                      <VBox.margin>
-                        <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+                        <Insets bottom="16.0" left="16.0" />
                      </VBox.margin>
                   </HBox>
                   <HBox>
-                     <children>
-                        <JFXTextField fx:id="textFieldPrincipal" prefHeight="29.0" prefWidth="196.0" promptText="Principal" />
-                     </children>
                      <VBox.margin>
-                        <Insets bottom="16.0" left="16.0" right="16.0" />
+                        <Insets bottom="16.0" left="16.0" />
                      </VBox.margin>
+                     <children>
+                        <JFXButton fx:id="buttonClear" buttonType="RAISED" prefHeight="48.0" prefWidth="188.0" style="-fx-background-color: #003399;" text="Clear" textFill="WHITE" />
+                     </children>
                   </HBox>
                </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="234.0">
                <children>
                   <HBox>
                      <children>
-                        <JFXTextField fx:id="textFieldInterestRate" prefHeight="29.0" prefWidth="196.0" promptText="Interest rate (0-100%)" />
+                        <JFXTextField fx:id="textFieldInterestRate" prefHeight="35.0" prefWidth="196.0" promptText="Interest rate (0-100%)" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="16.0" left="16.0" right="16.0" />
+                        <Insets bottom="16.0" left="16.0" />
                      </VBox.margin>
                   </HBox>
                   <HBox>
@@ -66,34 +69,75 @@
                         <JFXTextField fx:id="textFieldTaxRate" prefHeight="29.0" prefWidth="196.0" promptText="Tax rate %" />
                      </children>
                      <VBox.margin>
-                        <Insets bottom="16.0" left="16.0" right="16.0" />
+                        <Insets bottom="16.0" left="16.0" />
                      </VBox.margin>
                   </HBox>
                </children>
                <HBox.margin>
-                  <Insets bottom="16.0" right="16.0" top="16.0" />
+                  <Insets />
                </HBox.margin>
             </VBox>
          </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
       </HBox>
-      <JFXButton fx:id="buttonAddTabItem" contentDisplay="CENTER" layoutX="725.0" layoutY="898.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#addTabITem" prefHeight="52.0" prefWidth="52.0" text=" " textAlignment="CENTER">
-         <graphic>
-            <ImageView fitHeight="50.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/ic_add_circle_black_48dp_1x.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </JFXButton>
-      <JFXButton fx:id="buttonDeleteTabItem" contentDisplay="CENTER" layoutX="660.0" layoutY="898.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#deleteTabItem" prefHeight="52.0" prefWidth="52.0" text=" " textAlignment="CENTER">
-         <graphic>
-            <ImageView fitHeight="50.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/ic_remove_circle_black_48dp_1x.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </JFXButton>
-      <TableView fx:id="tableView" layoutX="24.0" layoutY="169.0" prefHeight="721.0" prefWidth="870.0" />
+      <VBox layoutX="48.0" layoutY="173.0" maxHeight="872.0" maxWidth="834.0" prefHeight="781.0" prefWidth="834.0" spacing="10" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="157.0">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label styleClass="title-label" text="Read Only Tree Table View               ">
+                     <HBox.margin>
+                        <Insets left="16.0" right="16.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="treeTableViewCount" minWidth="80" styleClass="title-label" />
+                  <JFXButton fx:id="treeTableViewAdd" buttonType="FLAT" text="+">
+                     <HBox.margin>
+                        <Insets left="8.0" right="8.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="treeTableViewRemove" buttonType="FLAT" text="-">
+                     <HBox.margin>
+                        <Insets right="8.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <StackPane HBox.hgrow="ALWAYS">
+                     <children>
+                        <StackPane maxWidth="200" StackPane.alignment="CENTER_RIGHT">
+                           <children>
+                              <JFXTextField fx:id="searchField" promptText="Search..." />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </StackPane>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <JFXTreeTableView fx:id="treeTableView" prefHeight="708.0" prefWidth="802.0">
+               <columns>
+                  <JFXTreeTableColumn fx:id="periodColumn" minWidth="45.0" prefWidth="53.0" resizable="false" text="Period" />
+                  <JFXTreeTableColumn fx:id="outflowColumn" minWidth="150.0" prefWidth="175.0" resizable="false" text="Outflow" />
+                  <JFXTreeTableColumn fx:id="inflowColumn" minWidth="150.0" prefWidth="175.0" resizable="false" text="Inflow" />
+                  <JFXTreeTableColumn fx:id="netCashFlowColumn" minWidth="115.0" prefWidth="130.0" resizable="false" text="Net Cash Flow" />
+                  <JFXTreeTableColumn fx:id="NPVColumn" minWidth="133" prefWidth="130.0" resizable="false" text="NPV" />
+                  <JFXTreeTableColumn fx:id="cumulativeNVPColumn" minWidth="133" prefWidth="130.0" resizable="false" text="Cum NPV" />
+               </columns>
+            </JFXTreeTableView>
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+      </VBox>
+      <BarChart fx:id="barChart" layoutX="883.0" layoutY="190.0" prefHeight="742.0" prefWidth="886.0" title="Cash Flow Diagram">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </BarChart>
    </children>
 </AnchorPane>

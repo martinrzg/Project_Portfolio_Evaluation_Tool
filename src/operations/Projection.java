@@ -15,8 +15,9 @@ public class Projection {
         double accumulated = 0.0;                                     //Accumulated
         double netFlow = 0;
 
-        data.get(0).setCumulativeCashFlow(data.get(0).getInflow() - data.get(0).getOutflow());
         accumulated = data.get(0).getInflow() - data.get(0).getOutflow();
+        data.get(0).setCumulativeCashFlow(accumulated);
+        data.get(0).setNetCashFlow(accumulated);
 
         for (int i=1; i<=p; i++) {
             netFlow = data.get(i).getInflow() - data.get(i).getOutflow();
@@ -25,6 +26,15 @@ public class Projection {
             data.get(i).setCumulativeCashFlow((float) accumulated);
         }
         return data;
+    }
+    public static int paybackGetROIPeriod(ObservableList<PaybackRow> data){
+        for (int i = 0; i < data.size(); i++) {
+            PaybackRow temp = data.get(i);
+            if(temp.getCumulativeCashFlow()>0){
+                return i;
+            }
+        }
+        return -1;
     }
 
 }

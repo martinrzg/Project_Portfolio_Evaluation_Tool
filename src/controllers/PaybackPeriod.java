@@ -13,17 +13,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import models.PaybackRow;
 import operations.Projection;
 import utils.Utils;
 
 import java.net.URL;
+import java.nio.DoubleBuffer;
 import java.util.ResourceBundle;
 import java.util.function.Function;
 
@@ -39,7 +42,7 @@ public class PaybackPeriod implements Initializable {
     @FXML private JFXTextField textFieldPrincipal;
     @FXML private JFXTextField textFieldInterestRate;
     @FXML private JFXComboBox<Integer> comboBoxPeriods;
-    @FXML private BarChart<Number, Number> barChart;
+    @FXML private BarChart<String, Number> barChart;
 
     // New Skeleton
     @FXML private JFXTreeTableView<PaybackRow> treeTableView;
@@ -52,11 +55,10 @@ public class PaybackPeriod implements Initializable {
     @FXML private JFXTreeTableColumn<PaybackRow, Double> netCashFlowColumn;
     @FXML private JFXTreeTableColumn<PaybackRow, Double> cumulativeColumn;
     @FXML private Label treeTableViewCount;
+    @FXML private JFXButton buttonClear;
 
     private ObservableList<PaybackRow> data ;
 
-    private XYChart.Data<Number, Number> dataChart;
-    private XYChart.Series seriesChart;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -64,34 +66,57 @@ public class PaybackPeriod implements Initializable {
         data = FXCollections.observableArrayList();
         data.add(new PaybackRow(0,0,0,0,0));
 
+
         setupTable();
         setupComboBox();
         setUpValidator();
+        setUpBarChart();
 
-        /*  setupBarChart  */
-
-        barChart.setTitle("Cash Flow Diagram");
-        barChart.getXAxis().setLabel("Period");
-        barChart.getYAxis().setLabel("Cash Flow");
-
-        //updateChartData();
-        /*data.addListener(new ListChangeListener<PaybackRow>() {
-            @Override
-            public void onChanged(Change<? extends PaybackRow> c) {
-                System.out.println(c.getList().get(data.size()-1).getPeriod());
-                seriesChart.getData().add(new XYChart.Data(data.get(data.size()-1).getPeriod()+"", data.get(data.size()-1).getNetCashFlow()));
-            }
+        buttonClear.setOnMouseClicked(e->{
+            data.clear();
+            final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
+            currCountProp.set(data.size());
         });
-        */
     }
 
-    /*public void updateChart(){
-        seriesChart.getData().removeAll();
+    private void setUpBarChart(){
+        barChart.getXAxis().setLabel("Period");
+        barChart.getYAxis().setLabel("USD");
+        barChart.setData(getChartData());
+        //barChart.getData().get(0).getNode().setStyle("-fx-bar-fill:#F44336;");
+
+    }
+
+    private ObservableList<XYChart.Series<String, Number>> getChartData(){
+        ObservableList<XYChart.Series<String, Number>> newData = FXCollections.observableArrayList();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+
+        series.setName("Cash Flow");
         for (int i = 0; i < data.size(); i++) {
-            dataChart =new XYChart.Data(i+"",data.get(i).getCumulative());
-            seriesChart.getData().add(dataChart);
+            PaybackRow temp = data.get(i);
+            final XYChart.Data<String, Number> dataForSerie = new XYChart.Data<>(Integer.toString(temp.periodProperty().intValue()),temp.netCashFlowProperty().doubleValue());
+            dataForSerie.nodeProperty().addListener(new ChangeListener<Node>() {
+                @Override
+                public void changed(ObservableValue<? extends Node> observable, Node oldValue, Node newNode) {
+                    if (newNode != null) {
+                        if (dataForSerie.getYValue().intValue() >= 0 ) {
+                            newNode.setStyle("-fx-bar-fill: #00C853;");
+                        } else  {
+                            newNode.setStyle("-fx-bar-fill: #F44336;");
+                        }
+                    }
+                }
+            });
+            series.getData().add(dataForSerie);
+            //series.getData().add(new XYChart.Data(Integer.toString(temp.periodProperty().intValue()), temp.netCashFlowProperty().doubleValue()));
         }
-    }*/
+
+        newData.addAll(series);
+        return newData;
+    }
+    private void updateBarChart(){
+        barChart.setData(getChartData());
+    }
 
     private void setUpValidator() {
         NumberValidator principalValidator = new NumberValidator();
@@ -150,10 +175,12 @@ public class PaybackPeriod implements Initializable {
     }
     private void addPeriods(int numPeriods){
         data.clear();
-        for (int i = 0; i < numPeriods; i++) {
+        for (int i = 0; i <= numPeriods; i++) {
             data.add(new PaybackRow( getDataIndex(),0,0,0,0) );
         }
-        //treeTableViewCount.setText("( "+String.valueOf(treeTableView.getCurrentItemsCount())+" )");
+        updateBarChart();
+        final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
+        currCountProp.set(data.size());
     }
 
     private void reCalculatePeriods() {
@@ -201,7 +228,8 @@ public class PaybackPeriod implements Initializable {
         outflowColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<PaybackRow, Double> t) -> {
             t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().outflowProperty().set(t.getNewValue());
             data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
-            printData();
+            updateBarChart();
+            //printData();
 
         });
         inflowColumn.setCellFactory((TreeTableColumn<PaybackRow, Double> param) -> {
@@ -211,20 +239,25 @@ public class PaybackPeriod implements Initializable {
         inflowColumn.setOnEditCommit((TreeTableColumn.CellEditEvent<PaybackRow, Double> t) -> {
             t.getTreeTableView().getTreeItem(t.getTreeTablePosition().getRow()).getValue().inflowProperty().set(t.getNewValue());
             data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
-            printData();
+            updateBarChart();
+            //printData();
         });
 
         treeTableViewAdd.setOnMouseClicked((e) -> {
             data.add(new PaybackRow(getDataIndex(),0,0,0,0));
+            updateBarChart();
             final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
             currCountProp.set(currCountProp.get() + 1);
+            //TODO make get textfield methods to make validation
             data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
         });
         treeTableViewRemove.setOnMouseClicked((e) -> {
             data.remove(treeTableView.getSelectionModel().selectedItemProperty().get().getValue());
             reCalculatePeriods();
+            updateBarChart();
             final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
             currCountProp.set(currCountProp.get() - 1);
+            //TODO make get textfield methods to make validation
             data = Projection.calculatePayback(data,Double.parseDouble(textFieldPrincipal.getText()),Double.parseDouble(textFieldInterestRate.getText()));
         });
 
