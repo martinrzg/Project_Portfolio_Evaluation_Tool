@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Checklist">
+   <children>
+      <VBox layoutX="58.0" layoutY="183.0" maxHeight="918.0" maxWidth="1641.0" prefHeight="918.0" prefWidth="1641.0" spacing="10" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label styleClass="title-label" text="Checklist">
+                     <HBox.margin>
+                        <Insets left="16.0" right="16.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="treeTableViewCount" minWidth="80" styleClass="title-label" />
+                  <StackPane HBox.hgrow="ALWAYS">
+                     <children>
+                        <StackPane maxWidth="200" StackPane.alignment="CENTER_RIGHT">
+                           <children>
+                              <JFXTextField fx:id="searchField" promptText="Search..." />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </StackPane>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <JFXTreeTableView fx:id="treeTableView" prefHeight="847.0" prefWidth="1607.0">
+               <columns>
+                  <JFXTreeTableColumn fx:id="topicColumn" minWidth="45.0" prefWidth="250.0" resizable="false" text="Topic" />
+                  <JFXTreeTableColumn fx:id="questionColumn" minWidth="0.0" prefWidth="700.0" resizable="false" text="Question" />
+                  <JFXTreeTableColumn fx:id="answerColumn" minWidth="0.0" prefWidth="660.0" resizable="false" text="Answer" />
+               </columns>
+            </JFXTreeTableView>
+         </children>
+         <padding>
+            <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

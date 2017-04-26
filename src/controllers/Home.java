@@ -45,7 +45,9 @@ public class Home implements Initializable
             final ObservableList<String> stylesheets = scene.getStylesheets();
             stylesheets.addAll(this.getClass().getResource("..//css/jfoenix-components.css").toExternalForm(),
                                this.getClass().getResource("..//css/jfoenix-design.css").toExternalForm(),
-                               this.getClass().getResource("..//css/jfoenix-main-demo.css").toExternalForm());
+                               this.getClass().getResource("..//css/jfoenix-main-demo.css").toExternalForm(),
+                               this.getClass().getResource("..//css/tab.css").toExternalForm()
+            );
 
         } catch (IOException e) {
             System.out.println("Error loading resource "+e.toString());
@@ -90,7 +92,7 @@ public class Home implements Initializable
                 break;
             case 2:             /*   CheckList  */
                 System.out.println("Checklist");
-                srcResource += "PaybackPeriod";
+                srcResource += "Checklist";
                 break;
             case 3:             /*    Matrix    */
                 System.out.println("Matrix");

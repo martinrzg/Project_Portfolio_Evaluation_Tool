@@ -1,6 +1,8 @@
 package operations;
 
+import com.sun.istack.internal.Nullable;
 import javafx.collections.ObservableList;
+import models.NPVRow;
 import models.PaybackRow;
 
 /**
@@ -9,7 +11,6 @@ import models.PaybackRow;
 public class Projection {
 
     public static ObservableList<PaybackRow> calculatePayback(ObservableList<PaybackRow> data, double principal, double interestRate){//recibir parametros
-
         interestRate = (interestRate/100)+1;                            //Interest rate
         int p = data.size()-1;                                        //Periods
         double accumulated = 0.0;                                     //Accumulated
@@ -36,5 +37,36 @@ public class Projection {
         }
         return -1;
     }
+
+    public static ObservableList<NPVRow> calculateNPV(ObservableList<NPVRow> data, double interestRate, double taxRate){
+        //System.out.println("ANTES     interestR: "+interestRate+ "  TaxRate: "+taxRate );
+        taxRate = (1) - (taxRate/100);
+        interestRate = 1 + (interestRate/100);
+        //System.out.println("BEFORE    interestR: "+interestRate+ "  TaxRate: "+taxRate );
+        double netCashFlow = data.get(0).getInflow()-data.get(0).getOutflow();
+        data.get(0).setNetCashFlow(netCashFlow);
+        double npv = ((data.get(0).getNetCashFlow())*taxRate)/1;
+        //System.out.println("NPV"+npv);
+        data.get(0).setNetPresentValue(npv);
+        data.get(0).setCumulativeNPV(npv);
+
+
+        for (int i = 1; i < data.size(); i++) {
+            NPVRow temp = data.get(i);
+            netCashFlow = temp.getInflow()-temp.getOutflow();
+            temp.setNetCashFlow(netCashFlow);
+            npv = (temp.getNetCashFlow()*taxRate)/(Math.pow(interestRate,temp.getPeriod()));
+            temp.setNetPresentValue(npv);
+            temp.setCumulativeNPV(npv+ data.get(i-1).getCumulativeNPV());
+        }
+
+        return data;
+    }
+
+    //public static ObservableList<NPVRow> calculateNPV
+
+
+
+
 
 }

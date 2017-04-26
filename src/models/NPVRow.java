@@ -1,6 +1,5 @@
 package models;
 
-import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -8,7 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 /**
  * Created by Martín Ruíz on 4/22/2017.
  */
-public class NVPRow extends RecursiveTreeObject<NVPRow> {
+public class NPVRow extends RecursiveTreeObject<NPVRow> {
     SimpleIntegerProperty period;
     SimpleDoubleProperty outflow;
     SimpleDoubleProperty inflow;
@@ -16,7 +15,7 @@ public class NVPRow extends RecursiveTreeObject<NVPRow> {
     SimpleDoubleProperty netPresentValue;
     SimpleDoubleProperty cumulativeNPV;
 
-    public NVPRow (int period, double outflow, double inflow, double netCashFlow, double netPresentValie, double cumulativeNVP){
+    public NPVRow(int period, double outflow, double inflow, double netCashFlow, double netPresentValie, double cumulativeNVP){
         this.period = new SimpleIntegerProperty(period);
         this.outflow = new SimpleDoubleProperty(outflow);
         this.inflow = new SimpleDoubleProperty(inflow);
