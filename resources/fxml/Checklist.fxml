@@ -10,7 +10,7 @@
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Checklist">
    <children>
-      <VBox layoutX="16.0" layoutY="16.0" maxHeight="918.0" maxWidth="1641.0" prefHeight="918.0" prefWidth="1641.0" spacing="10" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0">
+      <VBox layoutX="16.0" layoutY="16.0" maxHeight="918.0" maxWidth="1641.0" prefHeight="918.0" prefWidth="1641.0" spacing="10" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="140.0" AnchorPane.topAnchor="16.0">
          <children>
             <HBox alignment="CENTER">
                <children>
@@ -46,5 +46,6 @@
             <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
          </padding>
       </VBox>
+      <JFXButton fx:id="buttonSavePDF" buttonType="RAISED" layoutX="10.0" layoutY="10.0" prefHeight="82.0" prefWidth="110.0" style="-fx-background-color: #003399;" text="Save as PDF" textFill="WHITE" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0" />
    </children>
 </AnchorPane>

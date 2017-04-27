@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
@@ -74,6 +75,8 @@ public class Home implements Initializable
             tabPane.getTabs().get(i).setTooltip(new Tooltip(Utils.tabMessages[i]));
         }
 
+
+
     }
 
 
@@ -96,7 +99,7 @@ public class Home implements Initializable
                 break;
             case 3:             /*    Matrix    */
                 System.out.println("Matrix");
-                srcResource += "PaybackPeriod";
+                srcResource += "Matrix";
                 break;
             case 4:             /* Depreciation */
                 System.out.println("Depreciation");

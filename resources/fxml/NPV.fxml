@@ -20,7 +20,7 @@
       <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
    </padding>
    <children>
-      <HBox layoutX="10.0" layoutY="10.0">
+      <HBox layoutX="10.0" layoutY="10.0" prefHeight="166.0" prefWidth="755.0">
          <children>
             <VBox layoutX="10.0" layoutY="10.0">
                <children>
@@ -75,6 +75,14 @@
                </children>
                <HBox.margin>
                   <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox>
+               <children>
+                  <JFXButton fx:id="buttonSavePDF" buttonType="RAISED" prefHeight="123.0" prefWidth="180.0" style="-fx-background-color: #003399;" text="Save as PDF" textFill="WHITE" />
+               </children>
+               <HBox.margin>
+                  <Insets left="16.0" />
                </HBox.margin>
             </VBox>
          </children>

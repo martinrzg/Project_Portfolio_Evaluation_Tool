@@ -1,5 +1,6 @@
 package controllers;
 
+import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import com.jfoenix.validation.DoubleValidator;
@@ -8,19 +9,27 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import models.DepreciationRow;
-import models.NPVRow;
+import operations.Projection;
+import utils.PDFMaker;
 import utils.Utils;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -38,6 +47,8 @@ public class Depreciation implements Initializable {
     @FXML private JFXTreeTableColumn<DepreciationRow, Double> cumulativeDepreciationColumn;
     @FXML private JFXTextField searchField;
     @FXML private JFXButton buttonClear;
+    @FXML private JFXButton buttonSavePDF;
+    @FXML private JFXButton buttonCalculate;
     @FXML private JFXComboBox<Integer> comboBoxPeriods;
     @FXML private JFXComboBox<String> comboBoxCategory;
     @FXML private JFXComboBox<Integer> comboBoxStartingYear;
@@ -60,13 +71,75 @@ public class Depreciation implements Initializable {
         setupComboBox();
         setupValidator();
         setupLineChart();
+
+        buttonSavePDF.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    getChartImage();
+                    PDFMaker.makePDFDepreciation("Depreciation",data.size(),Double.parseDouble(textFieldPrincipal.getText()),
+                            Double.parseDouble(textFieldTaxRate.getText()),Double.parseDouble(textFieldSalvageValue.getText())
+                            ,comboBoxCategory.getSelectionModel().getSelectedItem(),comboBoxSalvagePeriod.getSelectionModel().getSelectedIndex(),
+                            data);
+                    //TODO Popup sucess save file!
+                } catch (DocumentException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        buttonCalculate.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Projection.calculateDepreciation(data,data.size(),Double.parseDouble(textFieldTaxRate.getText()),Double.parseDouble(textFieldPrincipal.getText()),
+                                                Double.parseDouble(textFieldSalvageValue.getText()),getCategoryFromComboBox(),comboBoxStartingYear.getValue().intValue(),
+                                                comboBoxSalvagePeriod.getValue().intValue());
+                updateLinearChart();
+            }
+        });
         data.addListener(new ListChangeListener<DepreciationRow>() {
             @Override
             public void onChanged(Change<? extends DepreciationRow> c) {
+
                 updateLinearChart();
             }
         });
     }
+
+    private void getChartImage(){
+        WritableImage image = lineChart.snapshot(new SnapshotParameters(),null);
+        File file = new File("DepreciationChart.png");
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+        } catch (IOException e) {
+            // TODO: handle exception here
+        }
+    }
+
+    public int getCategoryFromComboBox(){
+        int index = comboBoxCategory.getSelectionModel().getSelectedIndex();
+        switch (index){
+            case 0:
+                return 0;
+            case 1:
+                return 3;
+            case 2:
+                return 5;
+            case 3:
+                return 7;
+            case 4:
+                return 10;
+            case 5:
+                return 15;
+            case 6:
+                return 20;
+        }
+        return 0;
+    }
+
+
     private void updateLinearChart(){
         lineChart.setData(getChartData());
     }
@@ -163,6 +236,7 @@ public class Depreciation implements Initializable {
         comboBoxPeriods.valueProperty().addListener(new ChangeListener<Integer>() {
             @Override
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+                comboBoxSalvagePeriod.getItems().removeAll();
                 addPeriods(newValue);
                 for (int i = 0; i <= newValue; i++) {
                     comboBoxSalvagePeriod.getItems().add(i);

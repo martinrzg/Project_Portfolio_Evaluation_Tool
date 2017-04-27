@@ -68,6 +68,14 @@
                   <Insets bottom="16.0" right="16.0" top="16.0" />
                </HBox.margin>
             </VBox>
+            <VBox>
+               <children>
+                  <JFXButton fx:id="buttonSavePDF" buttonType="RAISED" prefHeight="108.0" prefWidth="190.0" style="-fx-background-color: #003399;" text="Save as PDF" textFill="WHITE" />
+               </children>
+               <HBox.margin>
+                  <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />
+               </HBox.margin>
+            </VBox>
          </children>
       </HBox>
       <VBox layoutX="70.0" layoutY="210.0" maxHeight="872.0" maxWidth="766.0" prefHeight="728.0" prefWidth="764.0" spacing="10" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="120.0">

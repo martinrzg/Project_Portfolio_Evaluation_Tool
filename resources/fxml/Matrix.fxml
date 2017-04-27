@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1800.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Matrix">
+   <children>
+      <TabPane layoutX="14.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1500.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Primary">
+               <content>
+                  <GridPane minWidth="-Infinity" prefHeight="921.0" prefWidth="1518.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="110.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Consideration" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Rating" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Weighting" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Weighted Value" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time constraints for project delivery" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Status of environmental approvals" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Availability of funding" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Well defined scope" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <ComboBox fx:id="cbp1" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cbp2" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="cbp3" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="cbp4" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <TextField fx:id="tfp1" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <TextField fx:id="tfp2" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <TextField fx:id="tfp3" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <TextField fx:id="tfp4" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Text fx:id="wvp1" strokeType="OUTSIDE" strokeWidth="0.0" text="wv1" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvp2" strokeType="OUTSIDE" strokeWidth="0.0" text="wv2" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <Text fx:id="wvp3" strokeType="OUTSIDE" strokeWidth="0.0" text="wv3" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvp4" strokeType="OUTSIDE" strokeWidth="0.0" text="wv4" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="wttp" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                        <Text fx:id="wvttp" strokeType="OUTSIDE" strokeWidth="0.0" text="wvt" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+                        <Label text="Weighted Total" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="wettp" text="wt" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <Label text="Weighting Guidelines" GridPane.columnIndex="7">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sufficient time for standard procurement" wrappingWidth="121.16339111328125" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not started" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Unknown" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Concept only" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Scope needs refinement" wrappingWidth="90.6646728515625" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Need to accelerate project delivery" wrappingWidth="114.97918701171875" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Underway" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Multiple funding periods/sources" wrappingWidth="102.36004638671875" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Insufficient time for standard delivery" wrappingWidth="117.1796875" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Complete" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Funding in place and available" wrappingWidth="120.078125" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Clearly defined scope" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                        <Label text="Low" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Medium" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="High" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnCalc1" mnemonicParsing="false" text="Calculate" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Label text="Weighting" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="pw" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </content></Tab>
+            <Tab text="Secundary">
+               <content>
+                  <GridPane>
+                     <children>
+                        <Label text="Consideration" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Rating" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Weighting" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Weighted Value" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Overall project complexity" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Complexity of performance requirements" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Project size" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Availability of qualified teams" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <ComboBox fx:id="cbs1" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cbs2" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="cbs3" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="cbs4" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <TextField fx:id="tfs1" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <TextField fx:id="tfs2" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <TextField fx:id="tfs3" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <TextField fx:id="tfs4" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Text fx:id="wvs1" strokeType="OUTSIDE" strokeWidth="0.0" text="wv1" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvs2" strokeType="OUTSIDE" strokeWidth="0.0" text="wv2" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <Text fx:id="wvs3" strokeType="OUTSIDE" strokeWidth="0.0" text="wv3" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvs4" strokeType="OUTSIDE" strokeWidth="0.0" text="wv4" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total" GridPane.halignment="CENTER" GridPane.rowIndex="12">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="wtts" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
+                        <Text fx:id="wvtts" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
+                        <Label text="Weighted Total" GridPane.halignment="CENTER" GridPane.rowIndex="13" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="wetts" text="wt" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="13" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Owner experience and resources " wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cost of project" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Degree of team collaboration" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of contracts" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Allocation of risks" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Interest in innovation" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbs5" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbs6" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbs7" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbs8" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbs9" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbs10" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER" />
+                        <TextField maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <TextField fx:id="tfs5" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <TextField fx:id="tfs6" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <TextField fx:id="tfs7" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+                        <TextField maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                        <TextField fx:id="tfs8" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+                        <TextField fx:id="tfs9" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+                        <TextField fx:id="tfs10" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvs5" strokeType="OUTSIDE" strokeWidth="0.0" text="wv5" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvs6" strokeType="OUTSIDE" strokeWidth="0.0" text="wv6" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvs7" strokeType="OUTSIDE" strokeWidth="0.0" text="wv7" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvs8" strokeType="OUTSIDE" strokeWidth="0.0" text="wv8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvs9" strokeType="OUTSIDE" strokeWidth="0.0" text="wv9" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="10" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvs10" strokeType="OUTSIDE" strokeWidth="0.0" text="wv10" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER" />
+                        <Label prefHeight="17.0" prefWidth="183.0" text="Weighting Guidelines" GridPane.columnIndex="7">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Medium" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Low" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="High" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Simple project" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Performance requirements unknown" wrappingWidth="127.4693603515625" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&lt; $ 1 million" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&lt; 3 possible bidders" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="No fixed budget" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Unknown teaming arrangements" wrappingWidth="120.3209228515625" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Owner retains majority of risk" wrappingWidth="125.09893798828125" GridPane.columnIndex="6" GridPane.rowIndex="10" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Many separate small contracts" wrappingWidth="122.90887451171875" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="First design/build project" wrappingWidth="122.98309326171875" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Low" GridPane.columnIndex="6" GridPane.rowIndex="11" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Moderate complexity" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Performance requirements established" wrappingWidth="123.6015625" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="\$1 to $ 5 million" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3 to 5 possible bidders" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Some experience" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Some budget flexibility" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="May know some team members" wrappingWidth="125.353515625" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Several contracts but manageable" wrappingWidth="123.0625" GridPane.columnIndex="7" GridPane.rowIndex="9" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Risks shared between owner and D/B team" wrappingWidth="123.856689453125" GridPane.columnIndex="7" GridPane.rowIndex="10" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medium" GridPane.columnIndex="7" GridPane.rowIndex="11" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Significant complexity" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Performance requirements known" wrappingWidth="115.220703125" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; $5 million" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="&gt; 5 bidders" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Significant experience" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fixed budget" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Owner familiar with the teams" wrappingWidth="112.075439453125" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="One overall contract" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Transfer majority of risk to D/B team" wrappingWidth="116.474609375" GridPane.columnIndex="8" GridPane.rowIndex="10" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="High" GridPane.columnIndex="8" GridPane.rowIndex="11" />
+                        <Button fx:id="btnCalc2" mnemonicParsing="false" text="Calculate" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Label text="Weighting" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <TextField fx:id="sw" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+            </Tab>
+            <Tab text="Other">
+               <content>
+                  <GridPane>
+                     <children>
+                        <Label text="Consideration" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Rating" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Weighting" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Weighted Value" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data Security" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Operational constraints" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Utility relocations" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="QC/QA responsibilities" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <ComboBox fx:id="cbo1" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cbo2" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="cbo3" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <ComboBox fx:id="cbo4" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <TextField fx:id="tfo1" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <TextField fx:id="tfo2" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <TextField fx:id="tfo3" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                        <TextField fx:id="tfo4" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Text fx:id="wvo1" strokeType="OUTSIDE" strokeWidth="0.0" text="wv1" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvo2" strokeType="OUTSIDE" strokeWidth="0.0" text="wv2" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <Text fx:id="wvo3" strokeType="OUTSIDE" strokeWidth="0.0" text="wv3" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvo4" strokeType="OUTSIDE" strokeWidth="0.0" text="wv4" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total" GridPane.halignment="CENTER" GridPane.rowIndex="10">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="wtto" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+                        <Text fx:id="wvtto" strokeType="OUTSIDE" strokeWidth="0.0" text="Total" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+                        <Label text="Weighted Total" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="wetto" text="wt" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Performance guarantees/warranties" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Design reviews/approvals" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Legal frame or requirements " wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ownership of intellectual property" wrappingWidth="215.7734375" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbo5" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbo6" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbo7" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+                        <ComboBox fx:id="cbo8" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+                        <TextField maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <TextField fx:id="tfo5" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <TextField fx:id="tfo6" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <TextField fx:id="tfo7" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+                        <TextField maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                        <TextField fx:id="tfo8" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="80.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvo5" strokeType="OUTSIDE" strokeWidth="0.0" text="wv5" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvo6" strokeType="OUTSIDE" strokeWidth="0.0" text="wv6" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvo7" strokeType="OUTSIDE" strokeWidth="0.0" text="wv7" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER" />
+                        <Text fx:id="wvo8" strokeType="OUTSIDE" strokeWidth="0.0" text="wv8" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER" />
+                        <Label prefHeight="17.0" prefWidth="183.0" text="Weighting Guidelines" GridPane.columnIndex="7">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Medium" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="Low" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="High" GridPane.columnIndex="8" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Low data security criteria" wrappingWidth="126.0220947265625" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Significant operational constraints" wrappingWidth="127.4693603515625" GridPane.columnIndex="6" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Significant utility relocations" wrappingWidth="121.896484375" GridPane.columnIndex="6" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Owner's responsibility" GridPane.columnIndex="6" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Significant design review required" wrappingWidth="124.044921875" GridPane.columnIndex="6" GridPane.rowIndex="7" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="No legal frame require" wrappingWidth="120.3209228515625" GridPane.columnIndex="6" GridPane.rowIndex="8" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Significant intellectual property" wrappingWidth="122.90887451171875" GridPane.columnIndex="6" GridPane.rowIndex="9" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Short term coverage" wrappingWidth="122.98309326171875" GridPane.columnIndex="6" GridPane.rowIndex="6" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Organization requires certain level of security" wrappingWidth="125.009765625" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Some operational constraints" wrappingWidth="123.6015625" GridPane.columnIndex="7" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Some utility relocations" GridPane.columnIndex="7" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Shared responsibility" GridPane.columnIndex="7" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medium term coverage" GridPane.columnIndex="7" GridPane.rowIndex="6" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Moderate owner review required" wrappingWidth="127.34375" GridPane.columnIndex="7" GridPane.rowIndex="7" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Legal advisory desired" wrappingWidth="125.353515625" GridPane.columnIndex="7" GridPane.rowIndex="8" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Some intellectual property" wrappingWidth="123.0625" GridPane.columnIndex="7" GridPane.rowIndex="9" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data that should be kept safe of with security protocols" wrappingWidth="126.705078125" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="No operational constraints" wrappingWidth="115.220703125" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Minimal utility relocations" wrappingWidth="124.669921875" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Design/build entity responsibility" wrappingWidth="123.4921875" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Long term warranties" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Short turn around/minimal review" wrappingWidth="123.0859375" GridPane.columnIndex="8" GridPane.rowIndex="7" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Legal workframe has to be established" wrappingWidth="112.075439453125" GridPane.columnIndex="8" GridPane.rowIndex="8" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="No intellectual property" GridPane.columnIndex="8" GridPane.rowIndex="9" />
+                        <Label text="Weighting" GridPane.columnIndex="4" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="ow" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                        <Button fx:id="calcOther" mnemonicParsing="false" text="Calculate" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="300.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="130.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="102.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="ALWAYS" />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+            </Tab>
+            <Tab text="Sub Totals">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="10.0" layoutY="12.0" prefHeight="520.0" prefWidth="872.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A. Primary Considerations" GridPane.rowIndex="1" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="B. Secondary Considerations" GridPane.rowIndex="2" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="C.  Other Considerations" GridPane.rowIndex="3" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Grand Total" GridPane.rowIndex="4" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Decision" GridPane.rowIndex="5" />
+                              <TextField fx:id="pwt" editable="false" maxWidth="115.0" prefHeight="25.0" prefWidth="115.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                              <TextField fx:id="swt" editable="false" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                              <TextField fx:id="owt" editable="false" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                              <TextField fx:id="wgt" editable="false" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                              <TextField fx:id="pwvt" editable="false" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                              <TextField fx:id="swvt" editable="false" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                              <TextField fx:id="owvt" editable="false" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                              <TextField fx:id="gtwv" editable="false" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                              <TextField fx:id="wvd" editable="false" maxWidth="115.0" minWidth="115.0" prefWidth="115.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                              <Label text="Weighting" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                              <Label text="Weighted Value" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                              <Button fx:id="btnDecision" mnemonicParsing="false" text="Make Decision" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

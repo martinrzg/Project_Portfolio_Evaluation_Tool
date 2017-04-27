@@ -1,5 +1,6 @@
 package controllers;
 
+import com.itextpdf.text.DocumentException;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.DoubleTextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
@@ -11,20 +12,29 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import models.NPVRow;
 import models.PaybackRow;
 import operations.Projection;
+import utils.PDFMaker;
 import utils.Utils;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -52,12 +62,23 @@ public class NPV implements Initializable {
     @FXML private Label treeTableViewCount;
     @FXML private JFXButton treeTableViewRemove;
     @FXML private JFXButton buttonClear;
+    @FXML private JFXButton buttonSavePDF;
+
 
     private static final String PREFIX = "( ";
     private static final String POSTFIX = " )";
 
     private ObservableList<NPVRow> data;
 
+    private void getChartImage(){
+        WritableImage image = barChart.snapshot(new SnapshotParameters(),null);
+        File file = new File("NPVChart.png");
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+        } catch (IOException e) {
+            // TODO: handle exception here
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         data = FXCollections.observableArrayList();
@@ -68,12 +89,30 @@ public class NPV implements Initializable {
         setupValidator();
         setUpBarChart();
 
+        buttonSavePDF.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    getChartImage();
+                    PDFMaker.makePDFNPV("Net Present Value",getInterestRate(),data.size(),getTaxRate(),
+                            data.get(data.size()-1).getCumulativeNPV(), data);
+                    //TODO Popup sucess save file!
+                } catch (DocumentException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
         buttonClear.setOnMouseClicked(e->{
             data.clear();
             final IntegerProperty currCountProp = treeTableView.currentItemsCountProperty();
             currCountProp.set(data.size());
         });
     }
+
     private double getInterestRate(){
         if(textFieldInterestRate.getText()!= null && !textFieldInterestRate.getText().isEmpty()){
             try{

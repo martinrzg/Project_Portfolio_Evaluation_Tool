@@ -1,9 +1,7 @@
 package controllers;
 
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.itextpdf.text.DocumentException;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.cells.editors.TextFieldEditorBuilder;
 import com.jfoenix.controls.cells.editors.base.GenericEditableTreeTableCell;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -11,15 +9,19 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.converter.DefaultStringConverter;
 import models.ChecklistRow;
+import utils.PDFMaker;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Function;
@@ -36,6 +38,7 @@ public class Checklist implements Initializable {
     @FXML private JFXTreeTableColumn<ChecklistRow, String> questionColumn;
     @FXML private JFXTreeTableColumn<ChecklistRow, String> topicColumn;
     @FXML private JFXTreeTableColumn<ChecklistRow, String> answerColumn;
+    @FXML private JFXButton buttonSavePDF;
 
     private ObservableList<ChecklistRow> data;
 
@@ -46,6 +49,22 @@ public class Checklist implements Initializable {
         data = FXCollections.observableArrayList();
         getTableData();
         setupTable();
+
+        buttonSavePDF.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                try {
+                    //getChartImage();
+                    PDFMaker.makePDFChecklist("Checklist", data);
+                    //TODO Popup sucess save file!
+                } catch (DocumentException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     private <T> void setupCellValueFactory(JFXTreeTableColumn<ChecklistRow, T> column, Function<ChecklistRow, ObservableValue<T>> mapper) {
