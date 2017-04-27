@@ -102,6 +102,7 @@ public class NPV implements Initializable {
         barChart.getXAxis().setLabel("USD");
         barChart.setData(getChartData());
     }
+
     private ObservableList<XYChart.Series<String, Number>> getChartData(){
         ObservableList<XYChart.Series<String, Number>> newData = FXCollections.observableArrayList();
         XYChart.Series<String, Number> series = new XYChart.Series<>();

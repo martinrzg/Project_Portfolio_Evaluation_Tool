@@ -100,7 +100,7 @@ public class Home implements Initializable
                 break;
             case 4:             /* Depreciation */
                 System.out.println("Depreciation");
-                srcResource += "PaybackPeriod";
+                srcResource += "Depreciation";
                 break;
             default:
                 break;
