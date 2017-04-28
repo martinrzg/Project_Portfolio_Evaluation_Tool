@@ -4,13 +4,16 @@ import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        //new Welcome().launchWelcomeScene(primaryStage);
-        new Home().displayHomeScreen(primaryStage);
+        new Welcome().launchWelcomeScene(primaryStage);
+        //new Home().displayHomeScreen(primaryStage);
 
         /*Parent root = FXMLLoader.load(getClass().getResource("fxml/Welcome.fxml"));
         primaryStage.setTitle("Project Portfolio Evaluation Tool");

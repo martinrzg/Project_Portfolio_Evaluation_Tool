@@ -145,8 +145,8 @@ public class Depreciation implements Initializable {
     }
 
     private void setupLineChart() {
-        lineChart.getXAxis().setLabel("xLabel");
-        lineChart.getYAxis().setLabel("yLabel");
+        lineChart.getXAxis().setLabel("Years");
+        lineChart.getYAxis().setLabel("Tax in USD");
         lineChart.setData(getChartData());
     }
     private ObservableList<XYChart.Series<String, Number>> getChartData(){

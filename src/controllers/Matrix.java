@@ -1,11 +1,13 @@
 package controllers;
 
+import com.itextpdf.text.DocumentException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
 import models.MatrixRow;
+import utils.PDFMaker;
 
 
 /**
@@ -127,6 +130,14 @@ public class Matrix implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 decision();
+                try {
+                    PDFMaker.makePDFMatrix("Project Screening Matrix",pwt.getText(),pwvt.getText(),swt.getText(),swvt.getText(),owt.getText()
+                                            ,owvt.getText(),wgt.getText(),gtwv.getText(),wvd.getText());
+                } catch (DocumentException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -225,11 +236,11 @@ public class Matrix implements Initializable {
                 wt += mrp[i].getWeighting();
             }
 
-            if(wt == 100){
+            if(wt != 100){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
-                alert.setContentText("Total weighting grater than 100!");
+                alert.setContentText("Total weighting different than 100!");
 
                 alert.showAndWait();
             }
@@ -309,7 +320,7 @@ public class Matrix implements Initializable {
                 wt += mrs[i].getWeighting();
             }
 
-            if(wt == 100){
+            if(wt != 100){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
@@ -397,11 +408,11 @@ public class Matrix implements Initializable {
                 wt += mro[i].getWeighting();
             }
 
-            if(wt == 100){
+            if(wt != 100){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Warning");
                 alert.setHeaderText(null);
-                alert.setContentText("Total weighting grater than 100!");
+                alert.setContentText("Total weighting different than 100!");
 
                 alert.showAndWait();
             }

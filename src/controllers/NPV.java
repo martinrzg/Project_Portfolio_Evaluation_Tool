@@ -59,6 +59,8 @@ public class NPV implements Initializable {
     @FXML private JFXTreeTableColumn<NPVRow, Double> NPVColumn;
     @FXML private JFXTreeTableColumn<NPVRow, Double> cumulativeNVPColumn;
 
+    @FXML private JFXTextField textFieldResult;
+
     @FXML private Label treeTableViewCount;
     @FXML private JFXButton treeTableViewRemove;
     @FXML private JFXButton buttonClear;
@@ -168,6 +170,7 @@ public class NPV implements Initializable {
         return newData;
     }
     private void updateBarChart(){
+        textFieldResult.setText(String.valueOf(data.get(data.size()-1).getCumulativeNPV()));
         barChart.setData(getChartData());
     }
 

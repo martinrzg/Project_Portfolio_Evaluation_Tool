@@ -56,6 +56,7 @@ public class PaybackPeriod implements Initializable {
     @FXML private JFXButton treeTableViewAdd;
     @FXML private JFXButton treeTableViewRemove;
     @FXML private JFXTextField searchField;
+    @FXML private JFXTextField textFieldResult;
     @FXML private JFXTreeTableColumn<PaybackRow, Integer> periodColumn;
     @FXML private JFXTreeTableColumn<PaybackRow, Double> outflowColumn;
     @FXML private JFXTreeTableColumn<PaybackRow, Double> inflowColumn;
@@ -64,6 +65,7 @@ public class PaybackPeriod implements Initializable {
     @FXML private Label treeTableViewCount;
     @FXML private JFXButton buttonClear;
     @FXML private JFXButton buttonSavePDF;
+
 
     private ObservableList<PaybackRow> data ;
 
@@ -163,6 +165,11 @@ public class PaybackPeriod implements Initializable {
         return newData;
     }
     private void updateBarChart(){
+        if(Projection.paybackGetROIPeriod(data) >=0){
+           textFieldResult.setText(String.valueOf(Projection.paybackGetROIPeriod(data)));
+        }else{
+            textFieldResult.setText("N/A");
+        }
         barChart.setData(getChartData());
     }
 

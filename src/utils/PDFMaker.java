@@ -1,6 +1,7 @@
 package utils;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -8,6 +9,8 @@ import controllers.NPV;
 import javafx.collections.ObservableList;
 import models.*;
 
+import java.awt.*;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Date;
@@ -17,6 +20,84 @@ import java.util.Date;
  */
 public class PDFMaker {
 
+    public static void makePDFMatrix(String methodName,String primaryWeighting, String primaryWeighted
+                                    ,String secondaryWeighting, String secondaryWeighted
+                                    ,String otherWeighting, String otherWeighted,
+                                     String totalWeighting, String totalWeghted, String result) throws DocumentException, IOException {
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(Session.getInstance().getProjectID()+"_"+methodName+".pdf"));//como quieres que se llame tu archivo
+            document.open();//a partir de aquí se va llenando el pdf, recuerda poner el .close
+            Image image = Image.getInstance("resources\\images\\logoTecLowRes.png");
+            image.scalePercent(40);//como agregar imagen
+
+            //document.add(new Paragraph("Image"));
+            document.add(image);
+            document.add(new Paragraph("Project Name: Evaluation Tool"  ));
+            document.add(new Paragraph("Project Number:" +Session.getInstance().getProjectID()));
+            document.add(new Paragraph("Evaluator name: "+Session.getInstance().getEvaluatorName()));
+            document.add(new Paragraph("Date: " + new Date().toString()));
+            document.add(new Paragraph(methodName, FontFactory.getFont(FontFactory.TIMES_BOLD, 18)));//puedes agregar texto estático y ponerle font y tamaño
+            //document.add(new Paragraph("------------------------------------------------------------"));
+
+            //document.add(new Paragraph("Principal:"+principal));
+            //document.add(new Paragraph("Salvage Value (if applicable):"+salvageValue));
+            document.add(new Paragraph("------------------------------------------------------------"));
+            document.add(new Paragraph(""));
+            PdfPTable table = new PdfPTable(3);
+            PdfPCell cell = new PdfPCell(new Paragraph("Matrix calculated table"));
+            cell.setColspan(3);//cuantas columnas en tu table
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.BLUE);
+            table.addCell(cell);
+
+            table.addCell("Consideration");//titulos de las columnas
+            table.addCell("Weighting");
+            table.addCell("Weighted Value");
+            table.addCell("Primary considerations");
+            table.addCell(primaryWeighting);
+            table.addCell(primaryWeighted);
+            table.addCell("Secondary considerations");
+            table.addCell(secondaryWeighting);
+            table.addCell(secondaryWeighted);
+            table.addCell("Other considerations");
+            table.addCell(otherWeighting);
+            table.addCell(otherWeighted);
+            table.addCell("Grand Total");
+            table.addCell(totalWeighting);
+            table.addCell(totalWeghted);
+            table.addCell("DECISION");
+            table.addCell("");
+            table.addCell(result);
+            document.add(table);
+            //agregar imagen al reporte
+            document.add(new Paragraph("The result was: "+result));
+            //JOptionPane.showMessageDialog(null, "Document saved");
+            document.add(new Paragraph(""));
+            document.add(new Paragraph("------------------------------------------------------------"));
+            document.add(new Paragraph(""));
+
+            PdfPTable table2 = new PdfPTable(3);
+            PdfPCell cell2 = new PdfPCell(new Paragraph("Decision Range"));
+            cell2.setColspan(3);//cuantas columnas en tu table
+            cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell2.setBackgroundColor(BaseColor.BLUE);
+            table.addCell(cell2);
+            table2.addCell("From");
+            table2.addCell("To");
+            table2.addCell("D/B Applicability");
+            table2.addCell("0");
+            table2.addCell("50");
+            table2.addCell("No");
+            table2.addCell("50");
+            table2.addCell("65");
+            table2.addCell("Can consider");
+            table2.addCell("65");
+            table2.addCell("100");
+            table2.addCell("Yes");
+            document.add(table2);
+        document.close();
+
+    }
 
     public static void makePDFDepreciation(String methodName,int periods, double principal,double taxRate, double salvage, String category, int salvagePeriod
                                             ,ObservableList<DepreciationRow> data) throws DocumentException, IOException {
@@ -263,6 +344,7 @@ public class PDFMaker {
         document.add(image2);
 
         document.close();
+
     }
 
 

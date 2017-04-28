@@ -147,5 +147,11 @@
             <NumberAxis side="LEFT" />
          </yAxis>
       </BarChart>
+      <VBox layoutX="1588.0" layoutY="52.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="16.0">
+         <children>
+            <JFXTextField editable="false" text="NPV" />
+            <JFXTextField fx:id="textFieldResult" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
