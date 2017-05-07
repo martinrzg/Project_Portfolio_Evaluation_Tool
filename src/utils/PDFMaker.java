@@ -220,8 +220,6 @@ public class PDFMaker {
         document.close();
     }
 
-
-
     public static void makePDFNPV(String methodName, double interestRate, int periods, double taxRate,
                                   double result, ObservableList<NPVRow> data) throws DocumentException, IOException {
         Document document = new Document();
